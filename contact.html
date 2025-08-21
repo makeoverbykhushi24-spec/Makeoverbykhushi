@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <style>
+        /* Elegant Makeup Artist Color Scheme */
+        :root {
+            --soft-blush: #F9E5E6;
+            --rose-quartz: #F7CACA;
+            --dusty-rose: #D4A5A5;
+            --deep-mauve: #886F6F;
+            --pearl-white: #FFF9F9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--pearl-white);
+            color: var(--deep-mauve);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            color: var(--dusty-rose);
+            font-style: italic;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--rose-quartz);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .contact-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: var(--deep-mauve);
+        }
+        
+        .contact-detail {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+        
+        .contact-link {
+            color: var(--deep-mauve);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-link:hover {
+            color: var(--dusty-rose);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--rose-quartz);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--dusty-rose);
+            transform: scale(1.1);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--soft-blush);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Makeover By Khushi</div>
+            <div class="tagline">Professional Makeup Artist</div>
+        </header>
+        
+        <main>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="contact-title">Studio Location</h3>
+                    <p class="contact-detail">
+                        Chutia<br>
+                        Ranchi<br>
+                        Jharkhand, 834001
+                    </p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="contact-title">Call Me</h3>
+                    <p class="contact-detail">
+                        <a href="tel:+919661732203" class="contact-link">(+91) 9661732203</a><br>
+                        Monday - Friday: 9am-6pm<br>
+                        Saturday: By appointment
+                    </p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="contact-title">Email Me</h3>
+                    <p class="contact-detail">
+                        <a href="mailto:hello@yourmakeupstudio.com" class="contact-link">makeover.by.khushi24@gmail.com</a><br>
+                        Response within 24 hours
+                    </p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.instagram.com/khushisurya_2548_official?igsh=MzRlODBiNWFlZA==" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1BSWD2cWBW/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/+919661732203" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Makeover By Khushi. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

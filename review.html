@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Reviews</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #f3c4c6;
+            --secondary: #a76e6f;
+            --dark: #3c2a2b;
+            --light: #f9f1f1;
+            --accent: #d4a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        /* Review Form */
+        .review-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+        
+        /* Reviews List */
+        .reviews-container {
+            margin-top: 2rem;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .review-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+        
+        .review-name {
+            font-weight: 600;
+        }
+        
+        .review-date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.2rem;
+        }
+        
+        .review-rating {
+            color: #f5b042;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Client Reviews</h1>
+        
+        <!-- Review Form -->
+        <div class="review-form">
+            <h2>Share Your Experience</h2>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="name" class="form-label">Your Name</label>
+                    <input type="text" id="name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="service" class="form-label">Service Received</label>
+                    <input type="text" id="service" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating" class="form-label">Rating</label>
+                    <select id="rating" class="form-input" required>
+                        <option value="">Select Rating</option>
+                        <option value="5">★★★★★ - Excellent</option>
+                        <option value="4">★★★★☆ - Very Good</option>
+                        <option value="3">★★★☆☆ - Good</option>
+                        <option value="2">★★☆☆☆ - Fair</option>
+                        <option value="1">★☆☆☆☆ - Poor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review" class="form-label">Your Review</label>
+                    <textarea id="review" class="form-textarea" 
+                              placeholder="Tell us about your experience with our makeup artist..." 
+                              required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="photo" class="form-label">Upload Photo (Optional)</label>
+                    <input type="file" id="photo" class="form-input" accept="image/*">
+                </div>
+                <button type="submit" class="btn">Submit Review</button>
+            </form>
+        </div>
+        
+        <!-- Reviews List -->
+        <div class="reviews-container">
+            <h2>Client Reviews</h2>
+            <div id="reviewsList" class="reviews-grid">
+                <!-- Reviews will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewForm = document.getElementById('reviewForm');
+            const reviewsList = document.getElementById('reviewsList');
+            
+            // Sample reviews data structure
+            let reviews = JSON.parse(localStorage.getItem('makeupReviews')) || [
+                {
+                    name: "Sarah Johnson",
+                    service: "Bridal Makeup",
+                    rating: 5,
+                    text: "Elena did an absolutely amazing job on my wedding day! My makeup stayed flawless from morning until late night. She perfectly captured the natural yet glamorous look I wanted.",
+                    date: "June 15, 2023",
+                    photo: ""
+                },
+                {
+                    name: "Michael Brown",
+                    service: "Editorial Makeup",
+                    rating: 4,
+                    text: "Great experience for our magazine shoot. The makeup translated perfectly on camera. Only minor feedback is the foundation could have matched my skin tone slightly better.",
+                    date: "May 2, 2023",
+                    photo: ""
+                }
+            ];
+            
+            // Save reviews to localStorage
+            function saveReviews() {
+                localStorage.setItem('makeupReviews', JSON.stringify(reviews));
+            }
+            
+            // Render all reviews
+            function renderReviews() {
+                reviewsList.innerHTML = '';
+                
+                if (reviews.length === 0) {
+                    reviewsList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-comment-slash" style="font-size: 3rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+                            <h3>No Reviews Yet</h3>
+                            <p>Be the first to share your experience!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                reviews.forEach((review, index) => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.className = 'review-card';
+                    
+                    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    
+                    let photoSection = '';
+                    if (review.photo) {
+                        photoSection = `
+                            <div class="review-photo" style="margin-top: 1rem;">
+                                <img src="${review.photo}" alt="Client photo showing makeup result" 
+                                     style="max-width: 100%; border-radius: 5px;">
+                            </div>
+                        `;
+                    }
+                    
+                    reviewCard.innerHTML = `
+                        <div class="review-header">
+                            <div class="review-avatar">${review.name.charAt(0)}</div>
+                            <div>
+                                <div class="review-name">${review.name}</div>
+                                <div class="review-date">${review.date}</div>
+                            </div>
+                        </div>
+                        <div class="review-service" style="color: var(--secondary); font-weight: 500; margin-bottom: 0.5rem;">
+                            ${review.service}
+                        </div>
+                        <div class="review-rating">${stars}</div>
+                        <div class="review-text">${review.text}</div>
+                        ${photoSection}
+                    `;
+                    
+                    reviewsList.appendChild(reviewCard);
+                });
+            }
+            
+            // Handle form submission
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const service = document.getElementById('service').value;
+                const rating = document.getElementById('rating').value;
+                const text = document.getElementById('review').value;
+                const photoInput = document.getElementById('photo');
+                const date = new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                if (!name || !service || !rating || !text) {
+                    alert('Please fill out all required fields');
+                    return;
+                }
+                
+                let photo = '';
+                if (photoInput.files.length > 0) {
+                    const file = photoInput.files[0];
+                    photo = URL.createObjectURL(file);
+                }
+                
+                const newReview = {
+                    name,
+                    service,
+                    rating: parseInt(rating),
+                    text,
+                    date,
+                    photo
+                };
+                
+                // Add to beginning of array (newest first)
+                reviews.unshift(newReview);
+                
+                // Save to localStorage
+                saveReviews();
+                
+                // Reset form
+                reviewForm.reset();
+                
+                // Re-render reviews
+                renderReviews();
+                
+                // Scroll to top of reviews
+                document.querySelector('.reviews-container').scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                alert('Thank you for your review!');
+            });
+            
+            // Initial render
+            renderReviews();
+            
+            // Auto-save every 5 minutes if new reviews were added
+            setInterval(function() {
+                if (reviews.some(review => !review.saved)) {
+                    saveReviews();
+                    reviews.forEach(review => review.saved = true);
+                }
+            }, 300000); // 5 minutes
+        });
+    </script>
+</body>
+</html>
